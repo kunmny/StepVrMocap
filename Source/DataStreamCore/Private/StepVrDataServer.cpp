@@ -3,7 +3,8 @@
 #include "StepMocapDefine.h"
 #include "CoreDelegates.h"
 
-
+const  int32		GStepFace2Nums = 24;
+static float		GStepFaceData2[GStepFace2Nums] = { 0 };
 static float		GStepFaceData[STEPFACEMORGHNUMS];
 static V4			GStepHandData[STEPHANDBONESNUMS];
 static transform	GStepMocapData[STEPBONESNUMS];
@@ -332,12 +333,11 @@ void FServicesData::GetHandData(TArray<FRotator>& OutData)
 
 void FServicesData::GetFaceData(TMap<FString, float>& OutData)
 {
-	int32 StepFaceLength = 0;
-	StepIK_Client::GetFaceData(GStepFaceData, StepFaceLength);
+	//int32 StepFaceLength = 0;
+	//StepIK_Client::GetFaceData(GStepFaceData, StepFaceLength);
+	StepIK_Client::GetFaceData2(GStepFaceData2);
 	
-	//static UEnum* GRootEnumPtr = FindObject<UEnum>(ANY_PACKAGE, TEXT("FStepFaceMorghs"), true);
-	//GRootEnumPtr->GetNameByValue(i).ToString()
-	OutData.Empty(StepFaceLength);
+	OutData.Empty(GStepFace2Nums);
 	for (int32 i = 0; i < StepFaceLength; i++)
 	{
 		if (StepFaceMorphTargets.IsValidIndex(i))

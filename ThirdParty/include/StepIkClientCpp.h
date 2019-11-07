@@ -7,10 +7,6 @@
 
 #include <string>
 
-
-#ifdef WITH_STEPMAGIC
-#include "VirtualShootingDll.h"
-#else
 struct V3
 {
 	float x;
@@ -33,7 +29,6 @@ struct transform
 	V4 Rotation;
 	V3 Scale;
 };
-#endif
 
 enum ServerStatus
 {
@@ -130,12 +125,15 @@ public:
 	void GloCaliDynamic(int iLR);//动态校准
 	void GloSetBtnCallBack(FnBtnCallBack pFn);//按键回调函数，见上方函数声明
 	
+	void GetMacHand(float *angles);
+
 	//deprecated.
 	void GloSetRotType(int iType);//已失效，只输出Global姿态。//设置输出的姿态（0 Local，1 Global）默认是0
 	
 	void GetHandPos(V3 * data);//在纯手模式下用于获得两只手的位置
 
 	void GetFaceData(float* fFaceData, int & iLen);
+	void GetFaceData2(float* fFaceData);
 
 	void GetMacArmData(MacArmData * data);//七轴机械臂专用,返回两个MacArmData
 
@@ -169,9 +167,11 @@ extern "C" {
 	STEPIK_DLL_API void GloSetBtnCallBack(FnBtnCallBack pFn);
 	STEPIK_DLL_API void GloSetRotType(int iType);
 
+	STEPIK_DLL_API void GetMacHand(float *angles);
 	STEPIK_DLL_API void GetHandPos(V3 * data);
 
 	STEPIK_DLL_API void GetFaceData(float* fFaceData, int & iLen);
+	STEPIK_DLL_API void GetFaceData2(float* fFaceData);
 
 	STEPIK_DLL_API void GetMacArmData(MacArmData * data);
 
